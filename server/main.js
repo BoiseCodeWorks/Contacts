@@ -12,8 +12,7 @@ let server = express()
 //NOTE Fire up database connection
 DbContext.connect()
 
-//NOTE Creates a reference to the build project on the client (if api only remove this line)
-server.use(express.static(__dirname + '/../client/dist'))
+
 
 //NOTE Allows requests from the port 8080, add additional addresses as needed
 let whitelist = ['http://localhost:8080'];
@@ -43,10 +42,11 @@ server.use('/account', new AuthController().router)
 
 //NOTE we have to import access to our controllers
 import ContactController from './controllers/ContactController'
+import ContactDetailsController from './controllers/ContactDetailsController'
 
 //NOTE remember the forward slash at the start of your path!
 server.use('/api/contacts', new ContactController().router)
-
+server.use('/api/contactDetails', new ContactDetailsController().router)
 
 
 //NOTE Everything below this line always stays the same
